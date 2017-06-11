@@ -166,8 +166,8 @@ public class Init {
                 ClusterInfoWriter.WriteInfo(twits, words, tfidfs, result.GetClustersNumbers(tfidfs), result.GetCenters(), sessionPath);//записываем информацию о кластерах
                 break;
             case Flexible:
-                //отправляем цифровые вектора в k-means, получаем результат
-                GeneticAlgorithm.Process(tfidfs, evaluator, cr -> { //даём метод по записи информации о кластерах, чтобы не мусорить сам обработчик, выполняется при каждой итерации оценивания
+                //вызываем обработчика ГА
+                GeneticAlgorithm.Process(tfidfs, evaluator, cr -> { 
                     String iterPath = String.format("%sIteration%s- %s clusters/", sessionPath, cr.IterationNumber, cr.ClusteringResult.ClustersNumber);//путь для текущей итерации оценивания
                     summoryList.add(ClusterInfoWriter.GetSummary(cr.ClusteringResult.ClustersNumber, cr.ClusteringResult.Evaluation));//дополняем лист результатов данными о текущей итерации
                     ClusterInfoWriter.WriteInfo(twits, words, tfidfs, cr.ClusteringResult.GetClustersNumbers(tfidfs), cr.ClusteringResult.GetCenters(), iterPath);//записываем информацию о кластерах
