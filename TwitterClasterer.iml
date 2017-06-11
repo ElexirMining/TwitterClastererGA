@@ -189,5 +189,6 @@
     <orderEntry type="library" name="Maven: de.erichseifert.gral:gral-core:0.11" level="project" />
     <orderEntry type="library" name="Maven: de.erichseifert.vectorgraphics2d:VectorGraphics2D:0.10" level="project" />
     <orderEntry type="library" name="Maven: org.apache.spark:spark-core-logging_2.11:1.5.2" level="project" />
+    <orderEntry type="library" name="Maven: io.jenetics:jenetics:3.7.0" level="project" />
   </component>
 </module>

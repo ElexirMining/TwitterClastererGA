@@ -1,3 +1,4 @@
+import ga.GeneticAlgorithm;
 import io.*;
 import kmeans.EvaluatingMethodEnum;
 import models.ClusteringResult;
@@ -155,7 +156,7 @@ public class Init {
         //tfidfs.cache();
 
         //Получаем оценщика для кластеров из фабрики по текущим настройкам
-        ClusterEvaluator evaluator = ClusterEvaluatorFactory.Get(evaluatingMethod);;
+        ClusterEvaluator evaluator = ClusterEvaluatorFactory.Get(evaluatingMethod);
 
         List<String> summoryList = new ArrayList<>(); //лист результатов оценивания
         switch (mode){
@@ -166,7 +167,7 @@ public class Init {
                 break;
             case Flexible:
                 //отправляем цифровые вектора в k-means, получаем результат
-                KMeansProcessor.Process(tfidfs, evaluator, cr -> { //даём метод по записи информации о кластерах, чтобы не мусорить сам обработчик, выполняется при каждой итерации оценивания
+                GeneticAlgorithm.Process(tfidfs, evaluator, cr -> { //даём метод по записи информации о кластерах, чтобы не мусорить сам обработчик, выполняется при каждой итерации оценивания
                     String iterPath = String.format("%sIteration%s- %s clusters/", sessionPath, cr.IterationNumber, cr.ClusteringResult.ClustersNumber);//путь для текущей итерации оценивания
                     summoryList.add(ClusterInfoWriter.GetSummary(cr.ClusteringResult.ClustersNumber, cr.ClusteringResult.Evaluation));//дополняем лист результатов данными о текущей итерации
                     ClusterInfoWriter.WriteInfo(twits, words, tfidfs, cr.ClusteringResult.GetClustersNumbers(tfidfs), cr.ClusteringResult.GetCenters(), iterPath);//записываем информацию о кластерах
